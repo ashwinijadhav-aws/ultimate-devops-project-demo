@@ -11,6 +11,7 @@ spec:
   description: Project for onlineshopping apps   # Optional description
   sourceRepos:                 # Which Git repos are allowed for this Project
     - https://github.com/ashwinijadhav-aws/ultimate-devops-project-demo.git
+    - https://github.com/ashwinijadhav-aws/argocd-demos.git
   destinations:                # Which clusters/namespaces apps in this Project can target
     - namespace: argocd
       server: https://kubernetes.default.svc  # Target cluster server url
