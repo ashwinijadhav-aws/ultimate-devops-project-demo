@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-opentelemetry-app                # Root application name
+  name: root-onlineshopping-app                # Root application name
   namespace: argocd            # Must always be created in ArgoCD's namespace
   annotations:
     argocd.argoproj.io/sync-wave: "1"  # Sync order, lower numbers sync first - ensures project is created before apps
