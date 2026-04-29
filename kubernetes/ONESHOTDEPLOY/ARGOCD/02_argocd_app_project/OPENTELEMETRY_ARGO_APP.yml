@@ -8,7 +8,7 @@ metadata:                        # Metadata section
   annotations:
     argocd.argoproj.io/sync-wave: "1"  # Sync order, lower numbers sync first
 spec:
-  project: opentelemetry-project         # Assigns app to the frontend-team Project
+  project: onlineshopping-project         # Assigns app to the frontend-team Project
   source:
     repoURL: https://github.com/ashwinijadhav-aws/ultimate-devops-project-demo.git  # Git repo
     targetRevision: main        # Branch to watch

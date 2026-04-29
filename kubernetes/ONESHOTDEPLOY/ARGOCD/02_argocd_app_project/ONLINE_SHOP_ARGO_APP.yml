@@ -8,7 +8,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"  # Sync order, lower numbers sync first
 spec:
-  project: opentelemetry-project  
+  project: onlineshopping-project  
   source:
     repoURL: https://github.com/ashwinijadhav-aws/argocd-demos.git # Repo containing child apps(that you have forked and cloned earlier)
     targetRevision: main
