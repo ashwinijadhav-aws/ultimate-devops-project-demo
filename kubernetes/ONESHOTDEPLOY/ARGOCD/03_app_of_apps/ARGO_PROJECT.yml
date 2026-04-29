@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1 # API version for ArgoCD Projects
 kind: AppProject               # Kind is always AppProject for Projects
 metadata:
-  name: openshopping-project          # Name of the Project (unique within ArgoCD)
+  name: onlineshopping-project          # Name of the Project (unique within ArgoCD)
   namespace: argocd            # Must always be created in ArgoCD's namespace
   annotations:
     argocd.argoproj.io/sync-wave: "0"  # Sync order, lower numbers sync first - ensures project is created before apps
@@ -24,7 +24,7 @@ spec:
       kind: "*"
   roles:                       # Define roles for RBAC within this Project
     - name: onlineshopping-admins    # Role name  
-      description: Admins for opentelemetry team
+      description: Admins for onlineshopping team
       policies:                # Policies associated with this role
         # syntax: - p, proj:<project-name>:<role-name>, applications/repositories/clusters/projects, <action>, <project>/<app-name>, permission(allow|deny)-- p, <subject>, <resource>, <action>, <object>, <effect>
         - p, proj:onlineshopping-project:onlineshopping-admins, applications, *, onlineshopping-project/*, allow  
