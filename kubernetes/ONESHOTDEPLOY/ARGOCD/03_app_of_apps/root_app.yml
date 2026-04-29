@@ -4,7 +4,7 @@ metadata:
   name: root-opentelemetry-app                # Root application name
   namespace: argocd            # Must always be created in ArgoCD's namespace
   annotations:
-    argocd.argoproj.io/sync-wave: "0"  # Sync order, lower numbers sync first - ensures project is created before apps
+    argocd.argoproj.io/sync-wave: "1"  # Sync order, lower numbers sync first - ensures project is created before apps
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
