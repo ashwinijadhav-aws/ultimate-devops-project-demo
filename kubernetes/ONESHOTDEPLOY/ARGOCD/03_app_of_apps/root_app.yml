@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-opentelemetry-app                # Root application name
+  namespace: argocd            # Must always be created in ArgoCD's namespace
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"  # Sync order, lower numbers sync first - ensures project is created before apps
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: opentelemetry-project               # Can also assign to a Project if needed
+  source:
+    repoURL: https://github.com/ashwinijadhav-aws/ultimate-devops-project-demo.git  # Repo containing child apps
+    targetRevision: main        # Git branch to track
+    path: kubernetes/ONESHOTDEPLOY/ARGOCD/02_argocd_app_project/   # Path where child app manifests are stored
+  destination:
+    server: https://kubernetes.default.svc  # Deploying inside the same cluster
+    namespace: argocd             # Applications (CRDs) must live in argocd namespace
+  syncPolicy:
+    automated:
+      prune: true                 # Prune removed child apps
+      selfHeal: true              # Auto-fix drift

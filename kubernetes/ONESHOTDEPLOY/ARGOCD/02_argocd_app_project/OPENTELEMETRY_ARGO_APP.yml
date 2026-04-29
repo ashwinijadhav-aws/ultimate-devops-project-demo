@@ -1,14 +1,18 @@
 apiVersion: argoproj.io/v1alpha1 # ArgoCD Application resource
 kind: Application               # Kind of resource
 metadata:                        # Metadata section                         
-  name: orderbird-springboot-app        # App name
+  name: opentelemetry-argocd-app        # App name
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
   namespace: argocd          # Must exist in ArgoCD namespace -ArgoCD only watches the argocd namespace by default.
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"  # Sync order, lower numbers sync first
 spec:
-  project: default        # Assigns app to the frontend-team Project
+  project: opentelemetry-project         # Assigns app to the frontend-team Project
   source:
-    repoURL: https://github.com/ashwinijadhav-aws/ORDERBIRD_K8S_MANIFEST_REPO.git  # Git repo
+    repoURL: https://github.com/ashwinijadhav-aws/ultimate-devops-project-demo.git  # Git repo
     targetRevision: main        # Branch to watch
-    path: SPRING-BOOT-APP-MANIFEST    # Path in repo with manifests
+    path: kubernetes/ONESHOTDEPLOY/K8S-MANIFEST/    # Path in repo with manifests
   destination:
     server: https://kubernetes.default.svc # Target cluster, run `argocd cluster list` to see
     namespace: default          # Namespace inside that cluster
@@ -17,4 +21,4 @@ spec:
       prune: true                 # Delete resources removed from Git
       selfHeal: true              # Correct drift if resources change in cluster
     syncOptions:                 # Additional sync options
-      - CreateNamespace=false      # Auto-create namespace if it doesn't exist
+      - CreateNamespace=true      # Auto-create namespace if it doesn't exist
