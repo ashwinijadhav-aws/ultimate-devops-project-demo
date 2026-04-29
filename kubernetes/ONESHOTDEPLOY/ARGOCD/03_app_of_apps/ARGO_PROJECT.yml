@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1 # API version for ArgoCD Projects
+kind: AppProject               # Kind is always AppProject for Projects
+metadata:
+  name: openshopping-project          # Name of the Project (unique within ArgoCD)
+  namespace: argocd            # Must always be created in ArgoCD's namespace
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"  # Sync order, lower numbers sync first - ensures project is created before apps
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project for onlineshopping apps   # Optional description
+  sourceRepos:                 # Which Git repos are allowed for this Project
+    - https://github.com/ashwinijadhav-aws/ultimate-devops-project-demo.git
+  destinations:                # Which clusters/namespaces apps in this Project can target
+    - namespace: argocd
+      server: https://kubernetes.default.svc  # Target cluster server url
+    - namespace: default
+      server: https://kubernetes.default.svc  # Target cluster server url
+  clusterResourceWhitelist:    # Which cluster-wide resources are allowed (e.g., CRDs)
+    - group: "*"               # '*' means allow all groups
+      kind: "*"                # '*' means allow all kinds
+  namespaceResourceWhitelist:  # Which namespace-level resources are allowed
+    - group: "*"               # Here also allowing everything
+      kind: "*"
+  roles:                       # Define roles for RBAC within this Project
+    - name: onlineshopping-admins    # Role name  
+      description: Admins for opentelemetry team
+      policies:                # Policies associated with this role
+        # syntax: - p, proj:<project-name>:<role-name>, applications/repositories/clusters/projects, <action>, <project>/<app-name>, permission(allow|deny)-- p, <subject>, <resource>, <action>, <object>, <effect>
+        - p, proj:onlineshopping-project:onlineshopping-admins, applications, *, onlineshopping-project/*, allow  
+        # Full access to all apps in this Project, Here p = policy, proj = project, applications = resource, * = action (all actions), onlineshopping-project/* = resource name pattern, allow = effect (allow or deny)
+        #Users with role onlineshopping-admins can perform any action on all applications in the onlineshopping-project
