@@ -31,7 +31,8 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: cartservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-cartservice'
+          #image: 'ghcr.io/open-telemetry/demo:1.12.0-cartservice'
+          image: 'ashwinijadhavaws/opentelemetry:cart-4.0.0'
           imagePullPolicy: IfNotPresent
           ports:
             
