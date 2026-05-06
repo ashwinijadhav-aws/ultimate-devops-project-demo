@@ -4,7 +4,7 @@ kind: Kustomization
 
 # list the manifest files in this directory
 resources:
-  - deploy.yml
+  - deploy.yaml
   - svc.yml
 
 
