@@ -5,7 +5,7 @@ kind: Kustomization
 # list the manifest files in this directory
 resources:
   - deploy.yaml
-  - svc.yml
+  - svc.yaml
 
 
 # (optional) you can put commonLabels or namespace here if you want
