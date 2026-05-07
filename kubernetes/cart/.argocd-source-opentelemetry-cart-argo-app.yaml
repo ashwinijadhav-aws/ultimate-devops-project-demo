@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - ashwinijadhavaws/opentelemetry:cart-5.1.0
